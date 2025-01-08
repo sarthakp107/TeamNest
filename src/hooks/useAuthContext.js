@@ -2,7 +2,7 @@ import { error } from "ajv/dist/vocabularies/applicator/dependencies";
 import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
 
-export const useAuthContest = () => {
+export const useAuthContext = () => {
 
     const context = useContext(AuthContext);
     if(!context){

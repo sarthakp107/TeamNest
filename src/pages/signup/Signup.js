@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 //styles
 import './Signup.css';
 
+//custom hooks
+import { useSignup } from '../../hooks/useSignup';
+
 
 export default function Signup() {
 
@@ -11,15 +14,19 @@ export default function Signup() {
   const [thumbnail, setThumbnail] = useState(null);
   const [thumbnailError, setThumbnailError] = useState('');
 
+  const {signup, error, isPending } = useSignup();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email, password, displayName, thumbnail );
+    signup(email, password, displayName, thumbnail );
+    console.log(email, password, displayName, thumbnail ); //should match the order from the hook
   }
 
 
   const handleFileChange = (e) => {
     setThumbnail(null);
     let selected = e.target.files[0];
+    console.log(selected)
     if (!selected) {
       setThumbnailError("Select a file");
       return
@@ -67,12 +74,13 @@ export default function Signup() {
         <span>Profile Thumbnail: </span>
         <input type="file"
           onChange={handleFileChange}
-        // value={thumbnail}
         />
 
         {thumbnailError && <div className='error'>{thumbnailError}</div>}
       </label>
-      <button className="btn">Signup</button>
+      {!isPending && <button className="btn">Signup</button>}
+      {isPending && <button className="btn" disabled>Loading</button>}
+      {error && <div className='error'>{error}</div>}
     </form>
   )
 }
