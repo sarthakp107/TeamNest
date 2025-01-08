@@ -25,7 +25,6 @@ export const useSignup = () => {
       // const img = await projectStorage.ref(uploadPath).put(thumbnail)
       // const imgUrl = await img.ref.getDownloadURL()
 
-      // // add display AND PHOTO_URL name to user
       await res.user.updateProfile({ displayName })
       setIsPending(false)
 
