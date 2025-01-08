@@ -11,40 +11,40 @@ export default function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [displayName, setDisplayName] = useState('');
-  const [thumbnail, setThumbnail] = useState(null);
-  const [thumbnailError, setThumbnailError] = useState('');
+  // const [thumbnail, setThumbnail] = useState(null);
+  // const [thumbnailError, setThumbnailError] = useState('');
 
   const {signup, error, isPending } = useSignup();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    signup(email, password, displayName, thumbnail );
-    console.log(email, password, displayName, thumbnail ); //should match the order from the hook
+    signup(email, password, displayName );
+    console.log(email, password, displayName ); //should match the order from the hook
   }
 
 
-  const handleFileChange = (e) => {
-    setThumbnail(null);
-    let selected = e.target.files[0];
-    console.log(selected)
-    if (!selected) {
-      setThumbnailError("Select a file");
-      return
-    }
-    if (!selected.type.includes('image')) {
-      setThumbnailError("Selected file must be an image");
-      return
-    }
-    if (selected.size > 100000) //bytes
-    {
-      setThumbnailError("Must be less than 100kb");
-      return
-    }
+  // const handleFileChange = (e) => {
+  //   setThumbnail(null);
+  //   let selected = e.target.files[0];
+  //   console.log(selected)
+  //   if (!selected) {
+  //     setThumbnailError("Select a file");
+  //     return
+  //   }
+  //   if (!selected.type.includes('image')) {
+  //     setThumbnailError("Selected file must be an image");
+  //     return
+  //   }
+  //   if (selected.size > 100000) //bytes
+  //   {
+  //     setThumbnailError("Must be less than 100kb");
+  //     return
+  //   }
 
-    setThumbnailError(null);
-    setThumbnail(selected);
-    console.log("Thumbnail Updated");
-  }
+  //   setThumbnailError(null);
+  //   setThumbnail(selected);
+  //   console.log("Thumbnail Updated");
+  // }
 
   return (
     <form className="auth-form" onSubmit={handleSubmit}>
@@ -70,14 +70,14 @@ export default function Signup() {
           value={displayName}
         />
       </label>
-      <label >
+      {/* <label >
         <span>Profile Thumbnail: </span>
         <input type="file"
           onChange={handleFileChange}
         />
 
         {thumbnailError && <div className='error'>{thumbnailError}</div>}
-      </label>
+      </label> */}
       {!isPending && <button className="btn">Signup</button>}
       {isPending && <button className="btn" disabled>Loading</button>}
       {error && <div className='error'>{error}</div>}

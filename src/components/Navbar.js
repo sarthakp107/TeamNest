@@ -4,8 +4,16 @@ import Temple from '../assets/temple.svg'
 
 import React from 'react'
 import { Link } from 'react-router-dom'
+import {useLogout} from '../hooks/useLogout';
 
 export default function Navbar() {
+
+    const{logout, error, isPending} = useLogout();
+
+const handleSubmit = (e) => {
+    e.preventDefault();
+    logout();
+}
   return (
     <div className='navbar'>
         <ul>
@@ -20,7 +28,8 @@ export default function Navbar() {
             </li>
 
             <li>
-                <button className='btn'>Logout</button>
+                {!isPending && <button className='btn' onClick={handleSubmit}>Logout</button>}
+                {isPending && <button className='btn' onClick={handleSubmit} disabled>Loading</button>}
             </li>
         </ul>
     </div>
