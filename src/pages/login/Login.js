@@ -9,14 +9,15 @@ import { useLogin } from '../../hooks/useLogin';
 
 export default function Login() {
 
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const {login, isPending, error} = useLogin();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     login(email, password); 
+    // console.log(email,password);
 
   }
   return (
@@ -30,7 +31,7 @@ export default function Login() {
         </label>
         <label>
           <span>Password: </span>
-          <input type="text" 
+          <input type="password" 
           onChange={(e) => setPassword(e.target.value)}
           value={password}/>
         </label>
