@@ -24,6 +24,7 @@ export const useLogout = () => {
       dispatch({ type: 'LOGOUT' })
 
       setIsPending(false);
+      setError(null);
 
       // update state
       if (!isCancelled) {

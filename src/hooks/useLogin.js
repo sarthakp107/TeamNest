@@ -26,24 +26,28 @@ export const useLogin = () => {
       // dispatch login action
       dispatch({ type: 'LOGIN', payload: res.user })
 
-      setIsPending(false);
-
       if (!isCancelled) {
         setIsPending(false)
         setError(null)
       }
     } 
     catch(err) {
-      if (!isCancelled) {
-        setError(err.message)
+      console.error('Error during login:', err.code, err.message)
+
+        setError("Invalid Login Credentials");
         setIsPending(false)
-      }
+      
     }
   }
 
   useEffect(() => {
-    return () => setIsCancelled(true)
-  }, [])
+    console.log('Hook mounted');
+    return () => {
+      console.log('Hook unmounted, setting isCancelled to true');
+      setIsCancelled(true);
+    };
+  }, []);
+  
 
   return { login, isPending, error }
 }
