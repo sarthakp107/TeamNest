@@ -19,13 +19,13 @@ export const useCollection = (collection, _query, _orderBy) => {
             ref = ref.where(...query);
         }
         if(orderBy){
-            ref = ref.orderBy(...orderBy)
+            ref = ref.orderBy(...orderBy) //sorting
         }
 
         const unsubscribe = ref.onSnapshot((snapshot) => { //listens real time data
             let results = [];
             snapshot.docs.forEach((doc) => {
-                results.push({...doc.data(), id: doc.id })//data = uid, name, amount .... id : id of the doc itself
+                results.push({...doc.data(), id: doc.id })//data = uid, name, amount .... id : id of the doc itself (eg refering to PAISA)
             })
 
             setDocuments(results);

@@ -18,7 +18,7 @@ export default function Sidebar() {
         <div className='sidebar'>
             <div className="sidebar-content">
                 <div className="user">
-                    <Avatar />
+                <Avatar displayName={user.displayName}/>
                     <p>Hey {displayName}</p>
                 </div>
                 <nav className='links'>
