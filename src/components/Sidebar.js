@@ -6,6 +6,9 @@ import { useAuthContext } from '../hooks/useAuthContext'
 
 import React from 'react'
 
+//avatar
+import Avatar from './Avatar'
+
 
 export default function Sidebar() {
 
@@ -15,6 +18,7 @@ export default function Sidebar() {
         <div className='sidebar'>
             <div className="sidebar-content">
                 <div className="user">
+                    <Avatar />
                     <p>Hey {displayName}</p>
                 </div>
                 <nav className='links'>
