@@ -40,10 +40,19 @@ export default function Create() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormError(null);
+
+    //empty category check
     if(!category){
       setFormError('Project Category required');
       return
     }
+
+    //empty assigned user check
+    if(assignedUsers.length < 1){
+      setFormError('Please Assign the Project to atleast 1 user');
+      return;
+    }
+
     console.log(name, details, dueDate, category.value);
   }
   return (
@@ -96,6 +105,7 @@ export default function Create() {
         </label>
         <button className="btn">Add Project</button>
       </form>
+      {formError && <p className='error'>{formError}</p>}
       
     </div>
   )
