@@ -3,6 +3,7 @@ import './Create.css';
 import React, { useEffect, useState } from 'react'
 import Select from 'react-select'; 
 import { useCollection } from '../../hooks/useCollection';
+import Avatar from '../../components/Avatar';
 
 
 
@@ -24,6 +25,8 @@ export default function Create() {
   const [category, setCategory] = useState('');
   const [assignedUsers, setAssignedUsers] = useState([]);
 
+  const [formError, setFormError] = useState(null);
+
   useEffect(() => {
     if(documents){
       const options = documents.map(user => {
@@ -36,6 +39,11 @@ export default function Create() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setFormError(null);
+    if(!category){
+      setFormError('Project Category required');
+      return
+    }
     console.log(name, details, dueDate, category.value);
   }
   return (
@@ -78,12 +86,12 @@ export default function Create() {
           />
         </label>
         <label>
-          <span>Assign to: </span>
+          <span>Assign to: </span> 
           <Select 
           onChange={(option) => setAssignedUsers(option )}
             options={users}
             isMulti //select multiple
-            
+
           />
         </label>
         <button className="btn">Add Project</button>
