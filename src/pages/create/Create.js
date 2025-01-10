@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import Select from 'react-select'; 
 import { useCollection } from '../../hooks/useCollection';
 import Avatar from '../../components/Avatar';
+import { timestamp } from '../../firebase/config';
 
 
 
@@ -53,6 +54,15 @@ export default function Create() {
       return;
     }
 
+    //creating a project object that we are going to save to the db
+    const project = {
+      name, //name: name
+      details,
+      category: category.value,
+      dueDate: timestamp.fromDate(new Date(dueDate)),
+
+    }
+
     console.log(name, details, dueDate, category.value);
   }
   return (
@@ -90,7 +100,7 @@ export default function Create() {
         <label>
           <span>Project Category: </span>
           <Select
-            onChange={(option) => setCategory(option)}
+            onChange={(option) => setCategory(option)} //option = user has currently selectedf
             options={categories}
           />
         </label>
