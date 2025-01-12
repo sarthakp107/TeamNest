@@ -6,6 +6,9 @@ import { useCollection } from '../../hooks/useCollection';
 import Avatar from '../../components/Avatar';
 import { timestamp } from '../../firebase/config';
 import {useAuthContext} from '../../hooks/useAuthContext';
+import {useFirestore} from '../../hooks/useFirestore';
+import { useNavigate } from 'react-router-dom';
+
 
 
 const categories = [
@@ -32,6 +35,13 @@ export default function Create() {
   const [formError, setFormError] = useState(null);
   const {user} = useAuthContext();
 
+  //useFirestore hook
+  const {addDocument, response} = useFirestore('projects');
+
+  //useNavigate hook
+  const navigate = useNavigate();
+
+
   useEffect(() => {
     if(documents){
       const options = documents.map(user => {
@@ -42,7 +52,7 @@ export default function Create() {
 
   },[documents])
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     setFormError(null);
 
@@ -81,7 +91,10 @@ export default function Create() {
       assignedUsersList
     }
 
-    console.log(project);
+   await addDocument(project);
+   if(!response.error){
+      navigate('/');
+   }
   }
   return (
     <div className='create-form'>
