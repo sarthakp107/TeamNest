@@ -5,7 +5,7 @@ import Select from 'react-select';
 import { useCollection } from '../../hooks/useCollection';
 import Avatar from '../../components/Avatar';
 import { timestamp } from '../../firebase/config';
-
+import {useAuthContext} from '../../hooks/useAuthContext';
 
 
 const categories = [
@@ -16,7 +16,9 @@ const categories = [
 ]
 
 export default function Create() {
-  const {documents} = useCollection('users')
+  //firebase collection
+  const {documents} = useCollection('users');
+
   const [users, setUsers] = useState('');
 
   //form fields
@@ -26,7 +28,9 @@ export default function Create() {
   const [category, setCategory] = useState('');
   const [assignedUsers, setAssignedUsers] = useState([]);
 
+  //form errors
   const [formError, setFormError] = useState(null);
+  const {user} = useAuthContext();
 
   useEffect(() => {
     if(documents){
@@ -54,16 +58,30 @@ export default function Create() {
       return;
     }
 
+    const createdBy = {
+      displayName: user.displayName,
+      id: user.uid
+    }
+
+    const assignedUsersList = assignedUsers.map((u) => {
+      return{
+        displayName: u.value.displayName, //current object we are iterating
+        id: u.value.id
+      }
+    })
+
     //creating a project object that we are going to save to the db
     const project = {
       name, //name: name
       details,
       category: category.value,
       dueDate: timestamp.fromDate(new Date(dueDate)),
-
+      comments: [],
+      createdBy,
+      assignedUsersList
     }
 
-    console.log(name, details, dueDate, category.value);
+    console.log(project);
   }
   return (
     <div className='create-form'>
@@ -107,7 +125,7 @@ export default function Create() {
         <label>
           <span>Assign to: </span> 
           <Select 
-          onChange={(option) => setAssignedUsers(option )}
+          onChange={(option) => setAssignedUsers(option)}
             options={users}
             isMulti //select multiple
 
@@ -118,5 +136,5 @@ export default function Create() {
       {formError && <p className='error'>{formError}</p>}
       
     </div>
-  )
+  ) 
 }
