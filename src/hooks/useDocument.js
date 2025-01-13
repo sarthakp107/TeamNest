@@ -11,10 +11,16 @@ export const useDocument = (collection, id) => {
 
     //real time data for document
     useEffect(() => {
-        const ref = projectFirestore.collection(collection).doc(id)
+        const ref = projectFirestore.collection(collection).doc(id);
+
        const unsubscribe = ref.onSnapshot((snapshot) => { //snapshot refers to the document in the db
+        if(snapshot.data()){
             setDocument({...snapshot.data(), id: snapshot.id})
             setError(null);
+        }
+        else{
+            setError('No such document exists');
+        }
         }, (err) => {
             console.log(err.message)
             setError('failed to get document');
@@ -23,7 +29,7 @@ export const useDocument = (collection, id) => {
 
     }, [collection, id])
 
-    
+
 
   return {document, error}
 }
