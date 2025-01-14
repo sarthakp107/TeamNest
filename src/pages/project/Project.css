@@ -11,6 +11,10 @@
     padding: 30px;
     border-radius: 4px;
   }
+  .title-createdBy {
+    display: flex;
+    justify-content: space-between;
+  }
 
   .project-summary .created-by {
     margin: 10px 0;
@@ -48,6 +52,7 @@
   }
 
   /* project comments */
+
 .project-comments label {
     margin-bottom: 0px;
   }

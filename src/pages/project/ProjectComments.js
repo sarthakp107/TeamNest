@@ -15,7 +15,6 @@ export default function ProjectComments({ project }) {
 
         const commentToAdd = {
             displayName: user.displayName,
-            // photo: <Avatar displayName={user.displayName}/>,
             content: newComment,
             createdAt: timestamp.fromDate(new Date()),
             id: Math.random()
