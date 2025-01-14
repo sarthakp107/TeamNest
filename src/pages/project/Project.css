@@ -40,3 +40,12 @@
   .project-summary .page-title{
     text-transform: capitalize;
   }
+
+  /* project comments */
+.project-comments label {
+    margin-bottom: 0px;
+  }
+  .project-comments textarea {
+    min-height: 40px;
+    font-size: 1.5em;
+  }
