@@ -75,17 +75,22 @@
   }
   .comment-author {
     display: flex;
-    align-items: center;
     color: var(--title-color);
+  }
+  .name-date{
+    display: flex;
+    flex-direction: column;
   }
   .comment-author .avatar {
     width: 30px;
     height: 30px;
     margin-right: 10px;
+    margin-top: 5px;
+
   }
   .comment-date {
-    color: var(--text-color);
-    font-size: 0.9em;
+    color: rgb(206, 105, 105);
+    font-size: 0.5em;
     margin: 4px 0 10px;
   }
   .comment-content {
