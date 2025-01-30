@@ -1,4 +1,5 @@
-## Things to add??
+## Things to add
+- add a landing page
 - gender option and based on it set the profile pic
 - user can set the assigned user to everyone and in select box everyones name should be there auto
 
