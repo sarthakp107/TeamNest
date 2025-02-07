@@ -1,4 +1,4 @@
-Add LANDING PAGE
+Add LANDING PAGE test
 ## Things to add
 - add a landing page
 - gender option and based on it set the profile pic
